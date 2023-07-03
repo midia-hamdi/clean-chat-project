@@ -20,10 +20,22 @@ export default class CleanChat extends Component {
                 user2: 'https://bootdey.com/img/Content/avatar/avatar2.png',
             }
         }
+
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(message){
         console.log(message)
+        this.setState(state => {
+            return {
+                ...state,
+                chatsList: [
+                    ...state.chatsList,
+                    {type: 'sent', message, time: new Date().toDateString()},
+                ]
+
+            }
+        })
     }
 
   render() {
@@ -33,7 +45,7 @@ export default class CleanChat extends Component {
             <div className="panel" id="chat">
                 <Heading title={this.state.title} />
                 <Body chatsList={this.state.chatsList} gravatar={this.state.gravatar} />
-                <Footer handeSubmit={this.handleSubmit} />
+                <Footer handleSubmit={this.handleSubmit} />
             </div>
             </div>
         </div>
